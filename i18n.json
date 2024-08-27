@@ -1,0 +1,7 @@
+{
+  "hello": "Hello",
+  "welcome": "Welcome to our application!",
+  "goodbye": "Goodbye and see you soon!",
+  "thank_you": "Thank you for using our service.",
+  "error_message": "An error has occurred, please try again later."
+}
