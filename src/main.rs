@@ -1,8 +1,10 @@
 use dotenv::dotenv;
+use reqwest::Client;
 use std::env;
 
 mod errors;
 mod languages;
+mod token;
 mod translate;
 
 use translate::translate_text;
@@ -10,13 +12,18 @@ use translate::translate_text;
 #[tokio::main]
 async fn main() {
     dotenv().ok();
+    let client = Client::new();
 
-    match env::var("API_KEY") {
-        Ok(api_key) => {
-            translate(api_key).await;
-        }
-        Err(e) => eprintln!("Couldn't read API_KEY: {}", e),
-    }
+    let text = "Hello, world!";
+    let tk = token::get(&client, text).await;
+    println!("Token: {}", tk.ok().unwrap());
+    //
+    // match env::var("API_KEY") {
+    //     Ok(api_key) => {
+    //         translate(api_key).await;
+    //     }
+    //     Err(e) => eprintln!("Couldn't read API_KEY: {}", e),
+    // }
 }
 
 async fn translate(api_key: String) {

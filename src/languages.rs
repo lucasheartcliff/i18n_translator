@@ -116,3 +116,8 @@ pub fn get_supported_languages() -> HashMap<&'static str, &'static str> {
 
     langs
 }
+pub fn get_languages() -> HashMap<&'static str, &'static str> {
+    let mut languages = get_supported_languages();
+    languages.remove("auto");
+    languages
+}
